@@ -9,7 +9,6 @@ router.get("/workouts", (req,res) => {
         totalDuration: {$sum: "$exercises.duration"}
     }).exec(function (err, r) {
         if (err) return handleError(err);
-        console.log(r);
         res.json(r);
 
       });
@@ -23,7 +22,6 @@ router.put("/workouts/:id", async (req,res) => {
         updateWorkout.exercises.push(req.body);
 
         const updated = await updateWorkout.save();
-        console.log(updated)
         res.json(updated);
     } catch (err) {
         console.log(err);
@@ -42,7 +40,6 @@ router.get("/workouts/range", (req,res) => {
         totalDuration: {$sum: "$exercises.duration"}
     }).exec(function (err, r) {
         if (err) return handleError(err);
-        console.log(r);
         res.json(r);
 
       });
