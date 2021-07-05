@@ -3,8 +3,6 @@ var db = require("../models");
 
 
 router.get("/workouts", (req,res) => {
-    //db.Workout.find({}).then((dbWorkouts) => res.json(dbWorkouts));
-
     db.Workout.aggregate().addFields({
         totalDuration: {$sum: "$exercises.duration"}
     }).exec(function (err, r) {
@@ -15,7 +13,6 @@ router.get("/workouts", (req,res) => {
 });
 
 router.put("/workouts/:id", async (req,res) => {
-    //db.Workout.updateOne({ _id: req.params.id }).exercises.push(req.body).then((dbWorkout) => res.json(dbWorkout));
 
     const updateWorkout = await db.Workout.findOne({ _id: req.params.id });
     try {
