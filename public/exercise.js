@@ -33,7 +33,12 @@ async function initExercise() {
 initExercise();
 
 function handleWorkoutTypeChange(event) {
-  workoutType = event.target.value;
+
+  if (!event) {
+    workoutType = null;
+  } else {
+    workoutType = event.target.value;
+  }
 
   if (workoutType === "cardio") {
     cardioForm.classList.remove("d-none");
@@ -127,6 +132,8 @@ function handleToastAnimationEnd() {
 }
 
 function clearInputs() {
+  workoutTypeSelect.selectedIndex = 0;
+  handleWorkoutTypeChange(false);
   cardioNameInput.value = "";
   nameInput.value = "";
   setsInput.value = "";
